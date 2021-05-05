@@ -8,12 +8,3 @@ phases:
     commands:
       - echo Installing source NPM dependencies...
       - npm run test
-  build:
-    commands:
-      - echo run build commands for more complicated workflows
-
-artifacts:
-  files:
-    - app.js
-    - index.js
-    - node_modules/**/*
