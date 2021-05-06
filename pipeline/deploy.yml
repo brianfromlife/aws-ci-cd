@@ -3,4 +3,8 @@ phases:
   build:
     commands:
       - echo building and deploying...
-      - ./deploy.sh
+      - npm install
+      - zip deploy.zip app.js index.js node_modules/
+      - aws s3 cp deploy.zip s3://$DEPLOY_BUCKET/deploy.zip
+      - aws elasticbeanstalk create-application-version --application-name $EBS_APP_NAME --version-label current --source-bundle S3Bucket="$DEPLOY_BUCKET",S3Key="deploy.zip"
+      - aws elasticbeanstalk update-environment --application-name $EBS_APP_NAME --environment-name $EBS_ENV_NAME --version-label current
