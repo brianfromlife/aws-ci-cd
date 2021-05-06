@@ -5,7 +5,7 @@ phases:
       - echo building and deploying...
       - printenv
       - npm install
-      - zip deploy.zip app.js index.js node_modules package.json
+      - zip -r deploy.zip app.js index.js node_modules package.json
       - aws s3 cp deploy.zip s3://${DEPLOY_BUCKET}/deploy.zip
       - aws elasticbeanstalk create-application-version --application-name ${EBS_APP_NAME} --version-label ${CODEBUILD_BUILD_NUMBER} --source-bundle S3Bucket="${DEPLOY_BUCKET}",S3Key="deploy.zip"
       - aws elasticbeanstalk update-environment --application-name ${EBS_APP_NAME} --environment-name ${EBS_ENV_NAME} --version-label ${CODEBUILD_BUILD_NUMBER}
