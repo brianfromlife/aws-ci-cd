@@ -3,4 +3,4 @@ phases:
   build:
     commands:
       - echo building and deploying...
-      - ./deploy.sh
+      - ./pipeline/deploy.sh
